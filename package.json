@@ -1,0 +1,9 @@
+{
+  "name": "fokify",
+  "version": "1.0.0",
+  "description": "Store your recipes on localStorage",
+  "main": "./src/index.html",
+  "repository": "https://github.com/ivanvinicius/forkify-recipes",
+  "author": "Ivan Vinicius Boneti",
+  "license": "MIT"
+}
