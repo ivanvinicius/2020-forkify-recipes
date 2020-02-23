@@ -24,6 +24,5 @@ const controlSearch = async () => {
 
 elements.searchForm.addEventListener('submit', e => {
   e.preventDefault();
-    
   controlSearch();
 })
