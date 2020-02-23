@@ -11,9 +11,8 @@ export default class Search {
   
     try {
       const res = await axios(cors + urlAPI)
-      this.result = res.data.recipes;
       
-      console.log(this.result);
+      this.result = res.data.recipes;
     } 
     catch (err) {
       alert(err);
