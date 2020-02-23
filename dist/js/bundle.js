@@ -3843,9 +3843,10 @@ eval("var g;\n\n// This works in non-strict mode\ng = (function() {\n\treturn th
   !*** ./src/js/index.js ***!
   \*************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("\n\n//# sourceURL=webpack:///./src/js/index.js?");
+"use strict";
+eval("\n\nvar x = 31;\n\nconsole.log(x);\n\n//# sourceURL=webpack:///./src/js/index.js?");
 
 /***/ }),
 
