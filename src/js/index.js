@@ -1,3 +1,5 @@
-const x = 31;
+import Search from './models/Search';
 
-console.log(x);
+const search = new Search('pizza');
+
+search.getResults();
