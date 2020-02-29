@@ -36,7 +36,7 @@ const renderRecipe = (recipe) => {
 
 export const getInput = () => elements.searchInput.value;
 
-export const renderResults = recipes => recipes.forEach(renderRecipe);
+export const renderResults = (recipes) => recipes.forEach(renderRecipe);
 
 export const clearInput = () => elements.searchInput.value = '';
 

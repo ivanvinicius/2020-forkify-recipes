@@ -1,5 +1,5 @@
 import Search from './models/Search';
-import  { elements }  from './views/elementsDom';
+import  { elements, renderLoader, clearLoader }  from './views/elementsDom';
 import * as searchView from './views/searchView';
 
 /** Global State of the app*/
@@ -14,15 +14,19 @@ const controlSearch = async () => {
 
     searchView.clearInput();
     searchView.clearResults();
+    
+    renderLoader(elements.searchRes);
 
     await state.search.getResults();
+
+    clearLoader();
 
     searchView.renderResults(state.search.result)
   }
 }
 
 
-elements.searchForm.addEventListener('submit', e => {
+elements.searchForm.addEventListener('submit', (e) => {
   e.preventDefault();
   controlSearch();
 })
