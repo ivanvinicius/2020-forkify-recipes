@@ -30,3 +30,17 @@ elements.searchForm.addEventListener('submit', (e) => {
   e.preventDefault();
   controlSearch();
 })
+
+elements.searchResPages.addEventListener('click', (e) => {
+  const btn = e.target.closest('.btn-inline');
+
+  if(btn) {
+    const gotoPage = Number(btn.dataset.goto);
+
+    searchView.clearResults();
+    searchView.clearPrintedBtn();
+
+    searchView.renderResults(state.search.result, gotoPage);
+  }
+  
+});
