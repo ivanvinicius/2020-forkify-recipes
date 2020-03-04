@@ -1,16 +1,17 @@
 import axios from 'axios'
 
+import { cors, urlAPI } from '../config';
+
 export default class Search {
   constructor(query){
     this.query = query;
   }
   
   async getResults(){
-    const cors = `https://cors-anywhere.herokuapp.com/`;
-    const urlAPI = `https://forkify-api.herokuapp.com/api/search?&q=${this.query}`
-  
+    const param = `search?&q=${this.query}`;
+
     try {
-      const res = await axios(cors + urlAPI)
+      const res = await axios(cors + urlAPI + param);
       
       this.result = res.data.recipes;
     } 
