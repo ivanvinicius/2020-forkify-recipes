@@ -6,7 +6,6 @@ import * as searchView from './views/searchView';
 /** Global State of the app*/
 const state = {};
 
-
 const controlSearch = async () => {
   const query = searchView.getInput()
 
@@ -17,15 +16,20 @@ const controlSearch = async () => {
     searchView.clearResults();
     
     renderLoader(elements.searchRes);
-
-    await state.search.getResults();
-
-    clearLoader();
-
-    searchView.renderResults(state.search.result)
+    
+    try {
+      await state.search.getResults();
+      
+      clearLoader();
+      
+      searchView.renderResults(state.search.result)
+    }
+    catch (err) {
+      clearLoader();
+      alert('error processing search')
+    }
   }
 }
-
 
 elements.searchForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -46,7 +50,24 @@ elements.searchResPages.addEventListener('click', (e) => {
   
 });
 
+const controlRecipe = async () => {
+  const id = window.location.hash.replace('#', '');
+  
+  if(id) {
+    state.recipe = new Recipe(id);
 
-const r = new Recipe(47746)
-r.getRecipe();
-console.log(r);
+    try {
+      await state.recipe.getRecipe();
+  
+      state.recipe.calcTime();
+      state.recipe.calcServings();
+  
+      console.log(state.recipe);
+    } 
+    catch (err) {
+      alert('error processing recipe');
+    }
+  }
+}
+
+['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
