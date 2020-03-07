@@ -7,8 +7,8 @@ import * as searchView from './views/searchView';
 const state = {};
 
 const controlSearch = async () => {
-  const query = searchView.getInput()
-
+  const query = searchView.getInput();
+  
   if(query){
     state.search = new Search(query);
 
@@ -58,10 +58,14 @@ const controlRecipe = async () => {
 
     try {
       await state.recipe.getRecipe();
+
+      console.log(state.recipe.ingredients);
+      
+      state.recipe.parseIngredients();
   
       state.recipe.calcTime();
       state.recipe.calcServings();
-  
+
       console.log(state.recipe);
     } 
     catch (err) {
@@ -70,4 +74,4 @@ const controlRecipe = async () => {
   }
 }
 
-['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+['hashchange', 'load'].forEach((event) => window.addEventListener(event, controlRecipe));
