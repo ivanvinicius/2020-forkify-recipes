@@ -2,6 +2,7 @@ import Search from './models/Search';
 import Recipe from './models/Recipe';
 import  { elements, renderLoader, clearLoader }  from './views/elementsDom';
 import * as searchView from './views/searchView';
+import * as recipeView from './views/recipeView';
 
 /** Global State of the app*/
 const state = {};
@@ -26,7 +27,8 @@ const controlSearch = async () => {
     }
     catch (err) {
       clearLoader();
-      alert('error processing search')
+      alert('Error on search')
+      console.log(err);
     }
   }
 }
@@ -54,22 +56,26 @@ const controlRecipe = async () => {
   const id = window.location.hash.replace('#', '');
   
   if(id) {
+    renderLoader(elements.recipe);
+
     state.recipe = new Recipe(id);
 
     try {
-      await state.recipe.getRecipe();
+      recipeView.clearRecipe();
 
-      console.log(state.recipe.ingredients);
+      await state.recipe.getRecipe();
       
       state.recipe.parseIngredients();
-  
       state.recipe.calcTime();
       state.recipe.calcServings();
 
-      console.log(state.recipe);
+      clearLoader();
+
+      recipeView.renderRecipe(state.recipe);
     } 
     catch (err) {
-      alert('error processing recipe');
+      alert('Error on recipe')
+      console.log(err)
     }
   }
 }
