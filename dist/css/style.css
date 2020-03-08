@@ -443,17 +443,18 @@ body {
   .shopping__list {
     list-style: none;
     max-height: 77rem;
-    overflow: scroll; }
+    overflow: scroll;
+    overflow-x: hidden; }
   .shopping__item {
     display: flex;
     align-items: flex-start;
     padding: 1.3rem 0;
-    border-bottom: 1px solid #F2EFEE;
+    border-bottom: 1px solid #e0dede;
     position: relative; }
   .shopping__count {
     flex: 0 0 7.5rem;
     padding: .4rem .5rem;
-    border: 1px solid #F2EFEE;
+    border: 1px solid #e0dede;
     border-radius: 3px;
     margin-right: 2rem;
     cursor: pointer;
@@ -465,11 +466,12 @@ body {
       font-size: 1.2rem;
       text-align: center;
       border: none;
-      width: 3.7rem;
+      width: 5.0rem;
+      padding-right: 1rem;
       border-radius: 3px; }
       .shopping__count input:focus {
         outline: none;
-        background-color: #F2EFEE; }
+        background-color: #e0dede; }
     .shopping__count p {
       font-size: 1.2rem; }
   .shopping__description {
