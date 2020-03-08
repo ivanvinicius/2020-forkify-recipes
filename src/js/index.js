@@ -1,10 +1,12 @@
+import  { elements, renderLoader, clearLoader }  from './views/elementsDom';
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 import List from './models/List';
-import  { elements, renderLoader, clearLoader }  from './views/elementsDom';
+import Like from './models/Like';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
+// import * as liketView from './views/likeView';
 
 /** Global State of the app*/
 const state = {};
@@ -131,6 +133,33 @@ elements.recipe.addEventListener('click', e => {
   else if(e.target.matches('.recipe__btn--add, .recipe__btn--add * ')) {
     controlList();
   }
+  else if(e.target.matches('.recipe__love, .recipe__love * ')) {
+    controlLike();
+  }
 })
+
+const controlLike = () => {
+  if(!state.like) state.like = new Like();
+
+  const id = state.recipe.id;
+
+  if(!state.like.isLiked(id)) {
+    const newLike = state.like.addLike(
+      id,
+      state.recipe.title,
+      state.recipe.author,
+      state.recipe.img
+    );
+
+    console.log(state.like);
+    
+  }
+  else {
+    state.like.deleteLike(id);
+
+    console.log(state.like);
+  }
+}
+
 
 window.l = new List();
