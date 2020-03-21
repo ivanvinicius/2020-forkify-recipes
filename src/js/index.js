@@ -12,9 +12,6 @@ import * as likeView from './views/likeView';
 
 /** Global State of the app*/
 const state = {};
-window.state = state;
-
-state.like = new Like();
 
 const controlSearch = async () => {
   const query = searchView.getInput();
@@ -82,7 +79,7 @@ const controlRecipe = async () => {
 
       clearLoader();
 
-      recipeView.renderRecipe(state.recipe, /**state.like.isLiked(id)*/);
+      recipeView.renderRecipe(state.recipe, state.like.isLiked(id));
     } 
     catch (err) {
       alert('Error on recipe')
@@ -170,7 +167,12 @@ const controlLike = () => {
   likeView.toggleLikeMenu(state.like.getNumLikes());
 }
 
-likeView.toggleLikeMenu(state.like.getNumLikes());
+window.addEventListener('load', () => {
+  state.like = new Like();
+  
+  state.like.readDataOnLocalStorage();
 
+  likeView.toggleLikeMenu(state.like.getNumLikes());
 
-window.l = new List();
+  state.like.like.forEach(el => likeView.renderLike(el));
+})
