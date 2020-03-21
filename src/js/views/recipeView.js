@@ -3,17 +3,18 @@ import { Fraction } from 'fractional'
 
 const formatCount = (count) => {
   if(count) {
-    const [int, dec] = count.toString().split('.').map(el => parseInt(el, 10));
+    const newCount = Math.round(count * 10) / 10;
+    const [int, dec] = newCount.toString().split('.').map(el => parseInt(el, 10));
 
-    if(!dec) return count;
+    if(!dec) return newCount;
 
     if(int === 0) {
-      const fraction = new Fraction(count);
+      const fraction = new Fraction(newCount);
       
       return `${fraction.numerator}/${fraction.denominator}`;
     }
     else {
-      const fraction = new Fraction(count - int);
+      const fraction = new Fraction(newCount - int);
       
       return `${int} ${fraction.numerator}/${fraction.denominator}`;
     }

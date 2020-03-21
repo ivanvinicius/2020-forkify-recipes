@@ -30,5 +30,4 @@ export const clearLoader = () => {
   const loader = document.querySelector(`.${elementsStrings.loader}`);
 
   if(loader) loader.parentElement.removeChild(loader);
-
 }
