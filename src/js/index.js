@@ -1,16 +1,20 @@
 import  { elements, renderLoader, clearLoader }  from './views/elementsDom';
+
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 import List from './models/List';
 import Like from './models/Like';
+
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
-// import * as liketView from './views/likeView';
+import * as likeView from './views/likeView';
 
 /** Global State of the app*/
 const state = {};
 window.state = state;
+
+state.like = new Like();
 
 const controlSearch = async () => {
   const query = searchView.getInput();
@@ -78,7 +82,7 @@ const controlRecipe = async () => {
 
       clearLoader();
 
-      recipeView.renderRecipe(state.recipe);
+      recipeView.renderRecipe(state.recipe, /**state.like.isLiked(id)*/);
     } 
     catch (err) {
       alert('Error on recipe')
@@ -151,15 +155,22 @@ const controlLike = () => {
       state.recipe.img
     );
 
-    console.log(state.like);
-    
+    likeView.toggleLikeBtn(true);
+
+    likeView.renderLike(newLike)
   }
   else {
     state.like.deleteLike(id);
+    
+    likeView.toggleLikeBtn(false);
 
-    console.log(state.like);
+    likeView.deleteLike(id)
   }
+  
+  likeView.toggleLikeMenu(state.like.getNumLikes());
 }
+
+likeView.toggleLikeMenu(state.like.getNumLikes());
 
 
 window.l = new List();
